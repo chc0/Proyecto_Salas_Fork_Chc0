@@ -1,0 +1,103 @@
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+/* Use a consistent scale for the login page */
+.login-page {
+  width: 90%;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+/* Adjust the font size for the prompt */
+.login-page h1 {
+  font-size: 1.5em; /* Smaller font size for the prompt */
+}
+
+/* Smaller form size */
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px; /* Limit the form's maximum width */
+  margin: 0 auto 5%;
+  padding: 5%;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #e7e9eb;
+  width: 100%; /* Use a percentage for responsiveness */
+  border: 0;
+  margin: 0 0 5%;
+  padding: 3% 5%;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%; /* Use a percentage for responsiveness */
+  border: 0;
+  padding: 3% 5%;
+  color: #FFFFFF;
+  font-size: 1em;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.form button:hover, .form button:active, .form button:focus {
+  background: #43A047;
+}
+
+.form .message {
+  margin: 5% 0 0;
+  color: #282c34;
+  font-size: 0.8em;
+}
+
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+/* Adjust margin and font size for responsiveness */
+.container .info {
+  margin: 10% auto;
+  text-align: center;
+}
+
+.container .info h1 {
+  margin: 0 0 5%;
+  padding: 0;
+  font-size: 2em;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+
+.container .info span {
+  color: #4d4d4d;
+  font-size: 0.8em;
+}
+
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.container .info span .fa {
+  color: #EF3B3A;
+}
+
+body {
+  background: #ececed;
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
