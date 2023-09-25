@@ -41,8 +41,6 @@ CREATE TABLE REGISTRO (
   FOREIGN KEY (id_alumno) REFERENCES USUARIO(usuario_id)
 );
 
-
-
 --//////////////////////////////////////////////////////////--
 --∙∙·▫▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ ADICIÓN DE OBJETOS TEMPORALES ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫▫·∙∙--
 --//////////////////////////////////////////////////////////--
