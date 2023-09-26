@@ -1,10 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+    <title>Simple Sidebar Menu</title>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="mySidebar">
+        <div class="sidebar-content">
+            <h2>Sidebar Menu</h2>
+            <div class="menu-item">Home</div>
+            <div class="menu-item">About</div>
+            <div class="menu-item">Services</div>
+            <div class="menu-item">Contact</div>
+        </div>
+    </div>
 
-<html>
-  <head>
-    <title>LOGIN</title> 
-    <link rel="stylesheet" href="/css/login.css"> 
-  </head>
-  <body>
-    <h1>HELLO MY BRUDA YOU'RE LOGGED IN W I G G A</h1>
-  </body>
+    <!-- Main content -->
+    <div class="main-content">
+        <button onclick="toggleSidebar()">Toggle Sidebar</button>
+        <h1>Main Content</h1>
+        <p>This is the main content area of your webpage.</p>
+    </div>
+
+    <script src="/js/toggle.js"></script>
+</body>
 </html>
+

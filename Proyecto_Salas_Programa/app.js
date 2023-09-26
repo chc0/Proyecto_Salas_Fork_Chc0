@@ -16,6 +16,7 @@ app.use(session({
     maxAge: 86400000, 
   },
 }));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
@@ -27,14 +28,13 @@ app.set('js', __dirname + '/js');
 app.use(express.static(__dirname + '/public'));
 
 // RUTAS Y MÉTODOS.
+app.get('/',(req,res)=>{res.redirect('/login')})
 app.get('/login', (req, res) => {res.render('login');});
 app.get('/register', (req, res) => {res.render('register');});
-app.get('/dashboard',(req, res) => {res.render('dashboard');});
 
 app.post('/login', (req, res) => 
 {
   const { username_or_email, password } = req.body;
-  console.log(username_or_email);
   get_pwd_hash(username_or_email, (err, pwd_hash_res)=>
   {
     if(err){console.log(err);res.render('login')}
@@ -45,8 +45,8 @@ app.post('/login', (req, res) =>
         if (password_Matches) 
         {
           req.session.isLoggedIn = true;
-          console.log('SESIÓN INICIADA!!');
-          res.render('dashboard');
+          req.session.username = username_or_email;
+          res.redirect('/dashboard');
         } else 
         {
           console.log('INTENTO DE SESIÓN FALLIDO');
@@ -54,7 +54,7 @@ app.post('/login', (req, res) =>
       })
       .catch((error) => 
       {
-          console.error('Password hashing failed:', error);
+          console.error('Hasheo de contraseña fallido:', error);
       });
     }
   });
@@ -89,6 +89,26 @@ app.post('/register', (req, res) =>
   });
 
 
+app.get('/dashboard', (req, res) =>
+{
+  if(req.session.isLoggedIn)
+  {
+    console.log("HELLO; USER LOGGED IN IS = " + req.session.username);
+    username = req.session.username;
+    res.render('dashboard',{username});
+
+
+
+
+  }else
+  {
+    res.render('login');
+  }
+});
+
+
+
+
 // FUNCIONES
 
 async function hashPassword(password)
@@ -120,7 +140,6 @@ async function verifyPassword(hashedPassword, providedPassword)
 
 function get_pwd_hash(username_or_email, callback)
 {
-  console.log("did THIS");
   db.query(
     'SELECT PASSWORD_HASH FROM USUARIO WHERE NOMBRE_USUARIO = ? OR EMAIL = ?', 
     [username_or_email,username_or_email],
@@ -130,10 +149,12 @@ function get_pwd_hash(username_or_email, callback)
       if (sql_res.length === 1)
       {
         const passwordHash = sql_res[0].PASSWORD_HASH;
-        console.log(passwordHash); 
         callback(null,passwordHash);
       } 
-      else{callback("USER NOT FOUND");}
+      else
+      {
+        callback("USER NOT FOUND");
+      }
     })
 }
 

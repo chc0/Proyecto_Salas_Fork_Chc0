@@ -1,0 +1,35 @@
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background-color: #333;
+    transition: left 0.3s ease-in-out;
+}
+
+.sidebar.show {
+    left: 0;
+}
+
+/* Sidebar content styles */
+.sidebar-content {
+    padding: 20px;
+    color: white;
+}
+
+/* Menu item styles */
+.menu-item {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.menu-item:hover {
+    background-color: #555;
+}
+
+/* Main content styles */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+}
