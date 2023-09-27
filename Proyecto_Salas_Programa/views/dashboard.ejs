@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+    <script src="/js/toggle.js"></script>
     <title>Simple Sidebar Menu</title>
 </head>
   <body>
@@ -16,6 +17,14 @@
         <div class="menu-item"> <img src="/images/user.png" alt="" class="menu-option-icon"> Perfíl</div>
         <div class="menu-item"> <img src="/images/classroom.png" class="menu-option-icon" alt=""> Salas</div>
         <div class="menu-item"> <img src="/images/presentation.png" class="menu-option-icon" alt=""> Ponencias</div>
+        <div class="menu-item"> 
+          <form action="/logout" method="get">
+            <button> 
+              <img src="/images/logout.png" class="menu-option-icon" alt="">
+                Salir 
+            </button>
+        </div>
+
       </div>
     </div>
 
@@ -28,7 +37,6 @@
       <p>This is the main content area of your webpage.</p>
     </div>
 
-    <script src="/js/toggle.js"></script>
   </body>
 </html>
 
