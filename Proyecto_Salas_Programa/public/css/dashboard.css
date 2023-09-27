@@ -1,25 +1,47 @@
-/* Default styles for the sidebar */
-.sidebar 
-{
+.sidebar {
     height: 100%;
     width: 250px;
     position: fixed;
     top: 0;
     left: -200px;
     background-color: #4CAF50;
-    transition: left 0.3s ease-in-out;
+    transition: left 0.9s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.sidebar:hover 
+.sidebar.show
 {
     left: 0;
 }
 
+.sidebar.show + .main-content
+{
+  margin-left: 250px;
+}
+
+.show .menu_toggle_icon 
+{ 
+  transform: rotate(180deg);
+  transition: transform 0.9s ease;
+}
+
+.show .menu-item
+{
+    background-color: #4CAF50;
+}
+
+
 /* Sidebar content styles */
 .sidebar-content 
 {
-    padding: 20px;
+    width: 100%;
+    border: 2px solid red; 
+    padding: 20px 0;
     color: white;
+    
 }
 
 /* Menu item styles */
@@ -31,11 +53,16 @@
 }
 .menu-item 
 {
-    padding: 10px 0;
+    padding: 4% 0;
+    font-size: 24px;
+    border-radius: 10px;
     text-align: center;
     position: relative;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
-
 
 .menu-item:hover 
 {
@@ -45,25 +72,28 @@
 
 .main-content 
 {
-    margin-left: 250px;
-    padding: 20px;
+    margin-left: 60px;
+    transition: margin-left 0.9s ease-in-out;
 }
 
 /* Responsive styles */
 @media screen and (max-width: 768px) 
 {
     /* Adjust the sidebar width for smaller screens */
-    .sidebar {
+    .sidebar 
+    {
         width: 200px;
     }
 
     /* Adjust the main content margin for smaller screens */
-    .main-content {
+    .main-content 
+    {
         margin-left: 200px;
     }
 
     /* Adjust the position of the icon for smaller screens */
-    .menu-item::before {
+    .menu-item::before 
+    {
         left: -20px; /* Adjust the position as needed */
     }
 }
@@ -71,16 +101,54 @@
 @media screen and (max-width: 576px) 
 {
     /* Further adjustments for even smaller screens */
-    .sidebar {
+    .sidebar 
+    {
         width: 150px;
     }
 
-    .main-content {
+    .main-content 
+    {
         margin-left: 150px;
     }
 
-    /* Further adjust the position of the icon for even smaller screens */
-    .menu-item::before {
-        left: -10px; /* Adjust the position as needed */
+
+    .menu-item::before 
+    {
+        left: -10px; 
     }
 }
+
+
+
+.menu-toggle-container 
+{
+    position: absolute;
+    top: 10px; /* Adjust the distance from the top as needed */
+    right: 10px; /* Adjust the distance from the right as needed */
+}
+
+.menu_toggle_icon {
+    width: 30px;
+    height: 50px;
+    background-color: #b350af;
+    background-image: url('/images/right-arrow.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    filter: invert(100%);
+    transition: transform 0.9s ease;
+}
+
+.menu-option-icon
+{
+    width: 30px; 
+    height: 30px; 
+    padding: 3%;
+    background-color: #b350af;
+    top: 20%;
+    filter: invert(100%);
+}
+
+

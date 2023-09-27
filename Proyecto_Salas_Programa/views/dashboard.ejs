@@ -6,22 +6,29 @@
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
     <title>Simple Sidebar Menu</title>
 </head>
-<body>
+  <body>
     <div class="sidebar" id="mySidebar">
-        <div class="sidebar-content">
-            <h2 class="title-item">Menu</h2>
-            <div class="menu-item">Perfíl</div>
-            <div class="menu-item">Salas</div>
-            <div class="menu-item">Ponencias</div>
+        <div class="menu-toggle-container">
+          <button onclick="toggleSidebar()" class="menu_toggle_icon"></button>
         </div>
+      <div class="sidebar-content">
+        <h2 class="title-item">Menú</h2>
+        <div class="menu-item"> <img src="/images/user.png" alt="" class="menu-option-icon"> Perfíl</div>
+        <div class="menu-item"> <img src="/images/classroom.png" class="menu-option-icon" alt=""> Salas</div>
+        <div class="menu-item"> <img src="/images/presentation.png" class="menu-option-icon" alt=""> Ponencias</div>
+      </div>
     </div>
 
     <div class="main-content">
-        <h1>Main Content</h1>
-        <p>This is the main content area of your webpage.</p>
+      <h1><%= username%></h1>
+      <h3>Nombre Completo: <%= full_name %></h3>
+      <h3>Email: <%= email %></h3>
+      <h3>Tipo de Usuario: <%= user_type  %></h3>
+      
+      <p>This is the main content area of your webpage.</p>
     </div>
 
     <script src="/js/toggle.js"></script>
-</body>
+  </body>
 </html>
 

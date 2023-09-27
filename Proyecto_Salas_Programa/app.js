@@ -45,8 +45,14 @@ app.post('/login', (req, res) =>
         if (password_Matches) 
         {
           req.session.isLoggedIn = true;
-          req.session.username = username_or_email;
-          res.redirect('/dashboard');
+          get_everything(username_or_email,(err,everything)=>
+          {
+            req.session.username = everything[0].nombre_usuario;
+            req.session.full_name = everything[0].nombre_completo;
+            req.session.user_type = everything[0].tipo_usuario;
+            req.session.email = everything[0].email;
+            res.redirect('/dashboard');
+          });
         } else 
         {
           console.log('INTENTO DE SESIÓN FALLIDO');
@@ -95,11 +101,10 @@ app.get('/dashboard', (req, res) =>
   {
     console.log("HELLO; USER LOGGED IN IS = " + req.session.username);
     username = req.session.username;
-    res.render('dashboard',{username});
-
-
-
-
+    full_name = req.session.full_name;
+    email = req.session.email;
+    user_type = req.session.user_type;
+    res.render('dashboard',{username,full_name,email,user_type});
   }else
   {
     res.render('login');
@@ -150,6 +155,25 @@ function get_pwd_hash(username_or_email, callback)
       {
         const passwordHash = sql_res[0].PASSWORD_HASH;
         callback(null,passwordHash);
+      } 
+      else
+      {
+        callback("USER NOT FOUND");
+      }
+    })
+}
+
+function get_everything(username_or_email, callback)
+{
+  db.query(
+    'SELECT * FROM USUARIO WHERE NOMBRE_USUARIO = ? OR EMAIL = ?', 
+    [username_or_email,username_or_email],
+    (err, sql_res) =>
+    {
+      if (err) {console.error(err);callback("sql_error")}
+      if (sql_res.length === 1)
+      {
+        callback(null,sql_res);
       } 
       else
       {
