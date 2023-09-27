@@ -1,35 +1,86 @@
-.sidebar {
+/* Default styles for the sidebar */
+.sidebar 
+{
     height: 100%;
     width: 250px;
     position: fixed;
     top: 0;
-    left: -250px;
-    background-color: #333;
+    left: -200px;
+    background-color: #4CAF50;
     transition: left 0.3s ease-in-out;
 }
 
-.sidebar.show {
+.sidebar:hover 
+{
     left: 0;
 }
 
 /* Sidebar content styles */
-.sidebar-content {
+.sidebar-content 
+{
     padding: 20px;
     color: white;
 }
 
 /* Menu item styles */
-.menu-item {
+.title-item 
+{
     padding: 10px 0;
     text-align: center;
+    position: relative;
+}
+.menu-item 
+{
+    padding: 10px 0;
+    text-align: center;
+    position: relative;
 }
 
-.menu-item:hover {
-    background-color: #555;
+
+.menu-item:hover 
+{
+    background-color: #9ef79e;
+    color: #585958;
 }
 
-/* Main content styles */
-.main-content {
+.main-content 
+{
     margin-left: 250px;
     padding: 20px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) 
+{
+    /* Adjust the sidebar width for smaller screens */
+    .sidebar {
+        width: 200px;
+    }
+
+    /* Adjust the main content margin for smaller screens */
+    .main-content {
+        margin-left: 200px;
+    }
+
+    /* Adjust the position of the icon for smaller screens */
+    .menu-item::before {
+        left: -20px; /* Adjust the position as needed */
+    }
+}
+
+@media screen and (max-width: 576px) 
+{
+    /* Further adjustments for even smaller screens */
+    .sidebar {
+        width: 150px;
+    }
+
+    .main-content {
+        margin-left: 150px;
+    }
+
+    /* Further adjust the position of the icon for even smaller screens */
+    .menu-item::before {
+        left: -10px; /* Adjust the position as needed */
+    }
 }
