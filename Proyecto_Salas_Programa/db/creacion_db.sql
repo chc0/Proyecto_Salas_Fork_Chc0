@@ -9,7 +9,8 @@ USE SALAS_DB;
 -- ♪ღ♪*•.¸¸.•*¨¨*•.♪ ℂℝ𝔼𝔸ℂ𝕀Óℕ 𝔻𝔼 𝕋𝔸𝔹𝕃𝔸𝕊 ♪ღ♪*•.¸¸.•*¨¨*•.♪ღ♪ --
 --//////////////////////////////////////////////////////////--
 
-CREATE TABLE USUARIO (
+CREATE TABLE USUARIO 
+(
   usuario_id INT AUTO_INCREMENT PRIMARY KEY,
   tipo_usuario ENUM('alumno', 'ponente', 'administrador') NOT NULL,
   password_hash VARCHAR(255) NOT NULL,
@@ -18,22 +19,34 @@ CREATE TABLE USUARIO (
   nombre_usuario VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE SALA (
+CREATE TABLE USUARIO_PONENCIA 
+(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_Usuario INT,
+  id_Ponencia INT,
+  FOREIGN KEY (id_Usuario) REFERENCES USUARIO(usuario_id),
+  FOREIGN KEY (id_Ponencia) REFERENCES PONENCIA(id_Ponencia)
+);
+
+CREATE TABLE SALA 
+(
   id_Sala INT AUTO_INCREMENT PRIMARY KEY,
   Ubicacion_Fisica VARCHAR(3),
   Cupo INT
 );
 
-CREATE TABLE PONENCIA (
+CREATE TABLE PONENCIA 
+(
   id_Ponencia INT AUTO_INCREMENT PRIMARY KEY,
-  id_Usuario INT,
+  id_Ponente INT, 
   id_Sala INT,
   Horario DATETIME,
-  FOREIGN KEY (id_Usuario) REFERENCES USUARIO(usuario_id),
-  FOREIGN KEY (id_Sala) REFERENCES SALA(id_Sala)
+  FOREIGN KEY (id_Sala) REFERENCES SALA(id_Sala),
+  FOREIGN KEY (id_Ponente) REFERENCES USUARIO(id_Usuario)
 );
 
-CREATE TABLE REGISTRO (
+CREATE TABLE REGISTRO 
+(
   id_ponencia INT,
   id_alumno INT,
   asistencia BOOLEAN,
@@ -44,11 +57,6 @@ CREATE TABLE REGISTRO (
 --//////////////////////////////////////////////////////////--
 --∙∙·▫▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ ADICIÓN DE OBJETOS TEMPORALES ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫▫·∙∙--
 --//////////////////////////////////////////////////////////--
-
-INSERT INTO USUARIO 
-(tipo_usuario, password_hash, email, nombre_completo, nombre_usuario)
-VALUES 
-('alumno', 'hashed_password', 'alvir@test.com', 'Andrés Alvir Guzmán', 'AlvirElWapo');
 
 
 
