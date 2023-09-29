@@ -23,7 +23,7 @@
 
 <𝐀𝐝𝐦𝐢𝐧𝐢𝐬𝐭𝐫𝐚𝐝𝐨𝐫>
   -Consultar, Modificar y Destruír Cuentas de alumno y ponente.
-  -Creación de Ponentes Temporales. <---------------------------DISCUTIR CÓMO SE HARÁ PLZ
+  -Creación de Ponentes Temporales. <---------------------------  DISCUTIR CÓMO SE HARÁ PLZ
   -Agregar, Consultar, Modificar y Destruír Ponencias.
 
   
