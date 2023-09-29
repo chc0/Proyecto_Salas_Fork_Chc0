@@ -51,7 +51,18 @@ app.post('/login', (req, res) =>
             req.session.full_name = everything[0].nombre_completo;
             req.session.user_type = everything[0].tipo_usuario;
             req.session.email = everything[0].email;
-            res.redirect('/dashboard');
+            if(req.session.user_type === 'alumno')
+            {
+              res.redirect('/dashboard');
+            }
+            else if(req.session.user_type === 'ponente')
+            {
+              res.redirect('/dashboard/ponente');
+            }
+            else if(req.session.user_type === 'administrador')
+            {
+              res.redirect('/admin');
+            }
           });
         } else 
         {
@@ -97,9 +108,8 @@ app.post('/register', (req, res) =>
 
 app.get('/dashboard', (req, res) =>
 {
-  if(req.session.isLoggedIn)
+  if(req.session.isLoggedIn & req.session.user_type === 'alumno')
   {
-    console.log("HELLO; USER LOGGED IN IS = " + req.session.username);
     username = req.session.username;
     full_name = req.session.full_name;
     email = req.session.email;
@@ -109,6 +119,39 @@ app.get('/dashboard', (req, res) =>
   {
     res.render('login');
   }
+});
+
+app.get('/dashboard/ponente', (req,res)=>
+{
+  if(req.session.isLoggedIn & req.session.user_type === 'ponente')
+  {
+    username = req.session.username;
+    full_name = req.session.full_name;
+    email = req.session.email;
+    user_type = req.session.user_type;
+    res.render('dashboard_ponente',{username,full_name,email,user_type});
+  }
+  else
+  {
+    res.render('login');
+  }
+});
+
+app.get('/admin', (req,res)=>
+{
+  if(req.session.isLoggedIn & req.session.user_type === 'administrador')
+  {
+    username = req.session.username;
+    full_name = req.session.full_name;
+    email = req.session.email;
+    user_type = req.session.user_type;
+    res.render('dashboard_admin',{username,full_name,email,user_type});
+  }
+  else
+  {
+    res.render('login');
+  }
+  
 });
 
 

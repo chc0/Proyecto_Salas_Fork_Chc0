@@ -1,0 +1,30 @@
+* Definir las capacidades que tiene cada tipo de usuario (alumno, ponente, admin)
+
+## TERE X FAVOR PIENSA EN ALGO AYUDAME XFABO O LO DEFINIMOS MAÑANA
+
+* Intentar mover acciones específicas de rutas a otros directorios.
+
+
+
+
+
+
+
+🇩🇪🇫🇮🇳🇮🇨🇮🇴🇳  🇩🇪  🇷🇴🇱🇪🇸
+
+<𝐚𝐥𝐮𝐦𝐧𝐨>
+  -Consultar Salas, Ponencias y Horarios.
+  -Inscribirse a Ponencias.
+  -Buscar Ponencias.
+
+<𝙋𝙤𝙣𝙚𝙣𝙩𝙚>
+  -Activar lista de Asistencia para su propia ponencia.
+  -Hacer más cosas mañana lo discutimos.
+
+<𝐀𝐝𝐦𝐢𝐧𝐢𝐬𝐭𝐫𝐚𝐝𝐨𝐫>
+  -Consultar, Modificar y Destruír Cuentas de alumno y ponente.
+  -Creación de Ponentes Temporales. <---------------------------DISCUTIR CÓMO SE HARÁ PLZ
+  -Agregar, Consultar, Modificar y Destruír Ponencias.
+
+  
+

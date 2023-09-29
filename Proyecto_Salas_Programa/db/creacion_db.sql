@@ -14,18 +14,9 @@ CREATE TABLE USUARIO
   usuario_id INT AUTO_INCREMENT PRIMARY KEY,
   tipo_usuario ENUM('alumno', 'ponente', 'administrador') NOT NULL,
   password_hash VARCHAR(255) NOT NULL,
-  email VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL UNIQUE,
   nombre_completo VARCHAR(100) NOT NULL,
-  nombre_usuario VARCHAR(30) NOT NULL
-);
-
-CREATE TABLE USUARIO_PONENCIA 
-(
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  id_Usuario INT,
-  id_Ponencia INT,
-  FOREIGN KEY (id_Usuario) REFERENCES USUARIO(usuario_id),
-  FOREIGN KEY (id_Ponencia) REFERENCES PONENCIA(id_Ponencia)
+  nombre_usuario VARCHAR(30) NOT NULL UNIQUE
 );
 
 CREATE TABLE SALA 
@@ -42,7 +33,16 @@ CREATE TABLE PONENCIA
   id_Sala INT,
   Horario DATETIME,
   FOREIGN KEY (id_Sala) REFERENCES SALA(id_Sala),
-  FOREIGN KEY (id_Ponente) REFERENCES USUARIO(id_Usuario)
+  FOREIGN KEY (id_Ponente) REFERENCES USUARIO(usuario_id)
+);
+
+CREATE TABLE USUARIO_PONENCIA 
+(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_Usuario INT,
+  id_Ponencia INT,
+  FOREIGN KEY (id_Usuario) REFERENCES USUARIO(usuario_id),
+  FOREIGN KEY (id_Ponencia) REFERENCES PONENCIA(id_Ponencia)
 );
 
 CREATE TABLE REGISTRO 
@@ -57,8 +57,4 @@ CREATE TABLE REGISTRO
 --//////////////////////////////////////////////////////////--
 --∙∙·▫▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ ADICIÓN DE OBJETOS TEMPORALES ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫▫·∙∙--
 --//////////////////////////////////////////////////////////--
-
-
-
-
 
