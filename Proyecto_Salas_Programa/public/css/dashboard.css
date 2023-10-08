@@ -20,7 +20,7 @@
 
 .sidebar.show + .main-content
 {
-  margin-left: calc(250px + 5%) ;
+  margin-left: calc(250px + 5%);
 }
 
 .show .menu_toggle_icon 
@@ -40,16 +40,14 @@
     visibility: visible;
 }
 
-/* Sidebar content styles */
 .sidebar-content 
 {
-    width: 100%;
+    width: 90%;
     padding: 20px 0;
     color: white;
     
 }
 
-/* Menu item styles */
 .title-item 
 {
     padding: 10px 0;
@@ -110,12 +108,13 @@
 .menu-toggle-container 
 {
     position: absolute;
-    top: 10px; /* Adjust the distance from the top as needed */
-    right: 10px; /* Adjust the distance from the right as needed */
+    top: 10px;
+    right: 10px; 
 }
 
-.menu_toggle_icon {
-    width: 30px;
+.menu_toggle_icon 
+{
+    width: 50px;
     height: 50px;
     background-color: transparent;
     background-image: url('/images/right-arrow.png');

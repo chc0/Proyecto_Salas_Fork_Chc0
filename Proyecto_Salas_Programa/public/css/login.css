@@ -1,35 +1,37 @@
-
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-/* Use a consistent scale for the login page */
-.login-page {
+.login-page 
+{
   width: 90%;
   padding: 8% 0 0;
   margin: auto;
 }
 
-/* Adjust the font size for the prompt */
-.login-page h1 {
-  font-size: 1.5em; /* Smaller font size for the prompt */
+.login-page h1 
+{
+  font-size: 1.5em; 
+  color: white;
 }
 
-/* Smaller form size */
-.form {
+.form 
+{
   position: relative;
+  border-radius: 10px;
   z-index: 1;
-  background: #FFFFFF;
-  max-width: 360px; /* Limit the form's maximum width */
+  background-image: linear-gradient(290deg, #02538a , #86befc );
+  max-width: 360px; 
   margin: 0 auto 5%;
   padding: 5%;
   text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.8), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.form input {
+.form input 
+{
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: #e7e9eb;
-  width: 100%; /* Use a percentage for responsiveness */
+  width: 100%; 
   border: 0;
   margin: 0 0 5%;
   padding: 3% 5%;
@@ -37,7 +39,8 @@
   font-size: 1em;
 }
 
-.form button {
+.form button 
+{
   font-family: "roboto", sans-serif;
   width: 50%;
   cursor: pointer;
@@ -52,6 +55,7 @@
   transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
   overflow: hidden;
 }
+
 .form button::before 
 {
   content: '';
@@ -74,8 +78,7 @@
 
 .form button:hover 
 {
-  color: #212121;
-  scale: 1.1;
+  scale: 1.2;
   box-shadow: 0 0px 20px rgba(193, 163, 98,0.4);
 }
 
@@ -93,7 +96,7 @@
 
 .form .message a 
 {
-  color: #0071aa;
+  color: #f9b174 ; 
   text-decoration: none;
   position: relative;
 }
@@ -106,7 +109,7 @@
   left: 0;
   width: 100%;
   height: 1px;
-  background-color: #0071aa;
+  background-color: #f9b174;
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.3s ease;
@@ -119,13 +122,14 @@
   background-color: #ff8403;
 }
 
-/* Adjust margin and font size for responsiveness */
-.container .info {
+.container .info 
+{
   margin: 10% auto;
   text-align: center;
 }
 
-.container .info h1 {
+.container .info h1 
+{
   margin: 0 0 5%;
   padding: 0;
   font-size: 2em;
@@ -133,22 +137,26 @@
   color: #1a1a1a;
 }
 
-.container .info span {
+.container .info span 
+{
   color: #4d4d4d;
   font-size: 0.8em;
 }
 
-.container .info span a {
+.container .info span a 
+{
   color: #000000;
   text-decoration: none;
 }
 
-.container .info span .fa {
+.container .info span .fa 
+{
   color: #EF3B3A;
 }
 
-body {
-  background: #ececed;
+body 
+{
+  background-image: linear-gradient(90deg, #02538a , #86befc );
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
