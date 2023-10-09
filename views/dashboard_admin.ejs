@@ -8,40 +8,61 @@
     <title>Simple Sidebar Menu</title>
 </head>
   <body>
+
     <div class="sidebar" id="mySidebar">
-        <div class="menu-toggle-container">
-          <button onclick="toggleSidebar()" class="menu_toggle_icon"></button>
-        </div>
+        <!-- Botón de toggle  -->
+
+      <div class="menu-toggle-container">
+        <button onclick="toggleSidebar()" class="menu_toggle_icon"></button>
+      </div>
+
+
       <div class="sidebar-content">
+        <!-- título -->
+
         <h2 class="title-item">Menú</h2>
-        <div class="menu-item"> <img src="/images/user.png" alt="" class="menu-option-icon"> Perfíl</div>
-        <div class="menu-item"> <img src="/images/classroom.png" class="menu-option-icon" alt=""> Salas</div>
-        <div class="menu-item"> <img src="/images/presentation.png" class="menu-option-icon" alt=""> Ponencias</div>
 
+        <!--  MODIFICAR PARA EJECUTAR JAVASCRIPT  -->
+        <!--  <a href="#" onclick="myFunction()">Click me</a>        -->
+        <a href="/logout" class="menu-item">
+          <img src="/images/user.png" class="menu-option-icon" alt="">
+          <%= username%>
+        </a>
 
+        <!--  MODIFICAR PARA EJECUTAR JAVASCRIPT  -->
+        <!--  <a href="#" onclick="myFunction()">Click me</a>        -->
+        <a href="/logout" class="menu-item">
+          <img src="/images/presentation.png" class="menu-option-icon" alt="">
+            Mis conferencias
+        </a>
 
-        <div class="menu-item"> 
-          <form action="/logout" method="get">
-            <button> 
-              <img src="/images/logout.png" class="menu-option-icon" alt="">
-                Salir 
-            </button>
-        </div>
+        <!--  MODIFICAR PARA EJECUTAR JAVASCRIPT  -->
+        <!--  <a href="#" onclick="myFunction()">Click me</a>        -->
+        <a href="/logout" class="menu-item">
+          <img src="/images/classroom.png" class="menu-option-icon" alt="">
+            Itinerarios
+        </a>
+
+        <!-- Botón de logout 󰗼 -->
+        <a href="/logout" class="menu-item">
+          <img src="/images/logout.png" class="menu-option-icon" alt="">
+            Salir
+        </a>
 
       </div>
     </div>
+      
+
+      <!-- Contenido Principal de la página. Editar para hacer los menús -->
 
     <div class="main-content">
-
-      <h1>  DASHBOARD ADMIN </h1>
+      <h1>  DASHBOARD ADMIN</h1>
       <h2><%= username%></h2>
       <h3>Nombre Completo: <%= full_name %></h3>
       <h3>Email: <%= email %></h3>
       <h3>Tipo de Usuario: <%= user_type  %></h3>
-      
       <p>This is the main content area of your webpage.</p>
     </div>
 
   </body>
 </html>
-
