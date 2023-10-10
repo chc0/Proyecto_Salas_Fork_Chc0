@@ -1,6 +1,4 @@
 const express = require('express');
-const session = require('express-session');
-const bodyParser = require('body-parser');
 const db = require('../db/database_connection');
 const argon2 = require('argon2');
 
@@ -53,6 +51,35 @@ app.post('/login', (req, res) =>
     }
   });
 });
+
+
+app.get('/register', (req, res) => {res.render('register');});
+
+app.post('/register', (req, res) => 
+{
+    const { username, email, full_name, password } = req.body;
+    hashPassword(password).then((contr_encriptada)=>
+    {
+    console.log( "HASH CREADO DE CONTRASEÑA: " + contr_encriptada)
+    db.query(
+      'INSERT INTO USUARIO (tipo_usuario, password_hash, email, nombre_completo, nombre_usuario) VALUES(?, ?, ?, ?,?) ;',
+      [ 'alumno' ,contr_encriptada, email, full_name, username],
+      (err, sql_res) =>
+      {
+        if (err) {console.error(err);return res.status(500).send('Internal Server Error at Registration');}
+        if (sql_res.affectedRows === 1)
+        {
+          console.log("REGISTRATION OF USER " + username); 
+          res.render('login')
+        } 
+        else {return res.status(401).send('REGISTRATION FAILED');}
+      });
+    }).catch((error) =>
+    {
+    // Handle the error here (e.g., log, return an error response)
+    console.error('ERROR AL HASHEAR CONTRASEÑA:', error);
+    });
+  });
 
 async function verifyPassword(hashedPassword, providedPassword) 
 {

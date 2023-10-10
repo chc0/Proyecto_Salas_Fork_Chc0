@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
     <script src="/js/toggle.js"></script>
-    <title>Simple Sidebar Menu</title>
+    <script src="/js/content_switch.js"></script>
+
+    <title>Menú Administrador</title>
 </head>
   <body>
 
@@ -24,7 +26,7 @@
 
         <!--  MODIFICAR PARA EJECUTAR JAVASCRIPT  -->
         <!--  <a href="#" onclick="myFunction()">Click me</a>        -->
-        <a href="/logout" class="menu-item">
+        <a href="#" onclick="load_content('opciones_usuario')" class="menu-item">
           <img src="/images/user.png" class="menu-option-icon" alt="">
           <%= username%>
         </a>
@@ -33,14 +35,21 @@
         <!--  <a href="#" onclick="myFunction()">Click me</a>        -->
         <a href="/logout" class="menu-item">
           <img src="/images/presentation.png" class="menu-option-icon" alt="">
-            Mis conferencias
+            Conferencias
         </a>
 
         <!--  MODIFICAR PARA EJECUTAR JAVASCRIPT  -->
         <!--  <a href="#" onclick="myFunction()">Click me</a>        -->
         <a href="/logout" class="menu-item">
           <img src="/images/classroom.png" class="menu-option-icon" alt="">
-            Itinerarios
+          Salas
+        </a>
+
+        <!--  MODIFICAR PARA EJECUTAR JAVASCRIPT  -->
+        <!--  <a href="#" onclick="myFunction()">Click me</a>        -->
+        <a href="/logout" class="menu-item">
+          <img src="/images/profile.png" class="menu-option-icon" alt="">
+          Usuarios
         </a>
 
         <!-- Botón de logout 󰗼 -->

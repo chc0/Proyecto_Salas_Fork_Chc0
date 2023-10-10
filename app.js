@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const db = require('./db/database_connection');
 const argon2 = require('argon2');
 const login_routes = require ('./routes/rutas_login');
+const dashboard_routes = require ('./routes/rutas_dashboards');
 
 //EXPRESS Y MIDDLEWARE
 const app = express();
@@ -29,101 +30,8 @@ app.set('js', __dirname + '/js');
 app.use(express.static(__dirname + '/public'));
 app.set('routes', __dirname + '/routes');
 
-
-
 app.use('/',login_routes);
-
-app.get('/register', (req, res) => {res.render('register');});
-
-app.post('/register', (req, res) => 
-{
-    const { username, email, full_name, password } = req.body;
-    hashPassword(password).then((contr_encriptada)=>
-    {
-    console.log( "HASH CREADO DE CONTRASEÑA: " + contr_encriptada)
-    db.query(
-      'INSERT INTO USUARIO (tipo_usuario, password_hash, email, nombre_completo, nombre_usuario) VALUES(?, ?, ?, ?,?) ;',
-      [ 'alumno' ,contr_encriptada, email, full_name, username],
-      (err, sql_res) =>
-      {
-        if (err) {console.error(err);return res.status(500).send('Internal Server Error at Registration');}
-        if (sql_res.affectedRows === 1)
-        {
-          console.log("REGISTRATION OF USER " + username); 
-          res.render('login')
-        } 
-        else {return res.status(401).send('REGISTRATION FAILED');}
-      });
-    }).catch((error) =>
-    {
-    // Handle the error here (e.g., log, return an error response)
-    console.error('ERROR AL HASHEAR CONTRASEÑA:', error);
-    });
-  });
-
-
-app.get('/dashboard', (req, res) =>
-{
-  if(req.session.isLoggedIn & req.session.user_type === 'alumno')
-  {
-    username = req.session.username;
-    full_name = req.session.full_name;
-    email = req.session.email;
-    user_type = req.session.user_type;
-    res.render('dashboard',{username,full_name,email,user_type});
-  }else
-  {
-    res.render('login');
-  }
-});
-
-app.get('/dashboard/ponente', (req,res)=>
-{
-  if(req.session.isLoggedIn & req.session.user_type === 'ponente')
-  {
-    username = req.session.username;
-    full_name = req.session.full_name;
-    email = req.session.email;
-    user_type = req.session.user_type;
-    res.render('dashboard_ponente',{username,full_name,email,user_type});
-  }
-  else
-  {
-    res.render('login');
-  }
-});
-
-app.get('/admin', (req,res)=>
-{
-  if(req.session.isLoggedIn & req.session.user_type === 'administrador')
-  {
-    username = req.session.username;
-    full_name = req.session.full_name;
-    email = req.session.email;
-    user_type = req.session.user_type;
-    res.render('dashboard_admin',{username,full_name,email,user_type});
-  }
-  else
-  {
-    res.render('login');
-  }
-  
-});
-
-
-app.get('/logout', (req, res) => 
-{
-    req.session.destroy((err) => 
-    {
-        if (err) {
-            console.error('Error destroying session:', err);
-        } else 
-        {
-          res.redirect('/login');
-        }
-    });
-});
-
+app.use('/',dashboard_routes);
 
 // FUNCIONES
 

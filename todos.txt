@@ -1,25 +1,21 @@
 * Definir las capacidades que tiene cada tipo de usuario (alumno, ponente, admin)
+--- Corrección, ponente = alumno, expositor = ponente.  
 
-## TERE X FAVOR PIENSA EN ALGO AYUDAME XFABO O LO DEFINIMOS MAÑANA
 
 * Intentar mover acciones específicas de rutas a otros directorios.
 
-
-* ASEGURAR CAMPO SIGN-IN...
-
-
-
+* Asignar Actividades Específicas a cada rol.
 
 
 
 🇩🇪🇫🇮🇳🇮🇨🇮🇴🇳  🇩🇪  🇷🇴🇱🇪🇸
 
-<𝐚𝐥𝐮𝐦𝐧𝐨>
+<ponente>
   -Consultar Salas, Ponencias y Horarios.
   -Inscribirse a Ponencias.
   -Buscar Ponencias.
 
-<𝙋𝙤𝙣𝙚𝙣𝙩𝙚>
+<expositor>
   -Activar lista de Asistencia para su propia ponencia.
   -Hacer más cosas mañana lo discutimos.
 
