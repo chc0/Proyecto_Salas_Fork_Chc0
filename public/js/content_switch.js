@@ -1,29 +1,20 @@
-function load_content(option) 
+function main_content_hide()
 {
-  const contentPaths = 
+  const parentDiv = document.querySelector(".main-content");
+  const childDivs = parentDiv.querySelectorAll("div");
+  childDivs.forEach((element) => 
   {
-    opciones_usuario: '/components/opciones_usuario.ejs',
-    // Update with other options and their corresponding HTML file paths as needed.
-    // For example:
-    // salas: '/componentes/salas.html',
-    // usuarios: '/componentes/usuarios.html',
-    // salir: '/componentes/salir.html',
-  };
-
-  const contentPath = contentPaths[option];
-
-  if (contentPath) 
-  {
-    fetch(contentPath)
-      .then((response) => response.text())
-      .then((htmlContent) => 
-      {
-        // Update the main-content div with the fetched HTML content.
-        document.querySelector('.main-content').innerHTML = htmlContent;
-      })
-      .catch((error) => 
-      {
-        console.error('Error fetching content:', error);
-      });
-  }
+    element.style.visibility = "hidden";
+    element.style.display = "none" 
+  });
 }
+
+function content_switch(id_content)
+{
+  main_content_hide();
+  const element = document.getElementById(id_content);
+  element.style.visibility = "visible";
+  element.style.display = "block";
+}
+
+main_content_hide();

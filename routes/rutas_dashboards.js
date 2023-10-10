@@ -1,7 +1,4 @@
 const express = require('express');
-const db = require('../db/database_connection');
-const argon2 = require('argon2');
-
 const app = express()
 
 app.get('/dashboard', (req, res) =>
@@ -65,6 +62,7 @@ app.get('/logout', (req, res) =>
         }
     });
 });
+
 
 
 
