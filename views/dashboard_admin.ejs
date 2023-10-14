@@ -40,6 +40,10 @@
             Usuarios
         </a>
 
+        <a href="/logout" class="menu-item">
+          <img src="/images/logout.png" class="menu-option-icon" alt="">
+            Salir
+        </a>
       </div>
     </div>
       
@@ -48,14 +52,20 @@
 
     <div class="main-content" >
 
+        <a onclick="content_switch('user_info')">
+          <img src="/images/home.png" alt="">
+        </a>
+              
+      <div id="user_info">
+        <h1>Información del Usuario</h1>
+        <h2>Username: <%= username %></h2>
+        <h2>Nombre Completo: <%= full_name %></h2>
+        <h2>Email: <%= email %></h2>
+        <h2>Tipo de Usuario: <%= user_type %></h2>
+      </div>
+
       <div id="user_options">
         <h1>User Options</h1>
-        <h1>  DASHBOARD ADMIN</h1>
-        <h2><%= username %></h2>
-        <h3>Nombre Completo: <%= full_name %></h3>
-        <h3>Email: <%= email %></h3>
-        <h3>Tipo de Usuario: <%= user_type %></h3>
-        <p>This is the main content area of your webpage.</p>
       </div>
 
       <!-- Content for Conferencias -->
@@ -75,6 +85,7 @@
         <h1>Usuarios</h1>
         <!-- Add your content here -->
       </div>
+
     </div>
     <script src="/js/content_switch.js"></script>
   </body>

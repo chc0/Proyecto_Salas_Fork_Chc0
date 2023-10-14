@@ -1,5 +1,6 @@
 // DEPENDENCIAS DE LIBRERÍAS
 const express = require('express');
+const path = require('path');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const db = require('./db/database_connection');
@@ -23,11 +24,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-
 // DIRECTORIOS DE ARCHIVOS
 app.set('views', __dirname + '/views');
 app.set('js', __dirname + '/js');
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, '/public/dist')));
 app.set('routes', __dirname + '/routes');
 
 app.use('/',login_routes);

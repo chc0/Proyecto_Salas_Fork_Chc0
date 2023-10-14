@@ -1,10 +1,13 @@
 const express = require('express');
+const path = require('path');
 const db = require('../db/database_connection');
 const argon2 = require('argon2');
 
 const app = express()
 
-app.get('/',(req,res)=>{res.redirect('/login')})
+app.get('/',(req,res)=>{res.sendFile('/index.html')})
+
+
 app.get('/login', (req, res) => {res.render('login');});
 
 app.post('/login', (req, res) => 

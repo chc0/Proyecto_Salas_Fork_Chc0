@@ -8,6 +8,19 @@ function main_content_hide()
     element.style.display = "none" 
   });
 }
+function hide_except(id_content)
+{
+  const parentDiv = document.querySelector(".main-content");
+  const childDivs = parentDiv.querySelectorAll("div");
+  childDivs.forEach((element) => 
+  {
+    if(element != document.getElementById(id_content))
+    {
+        element.style.visibility = "hidden";
+        element.style.display = "none" 
+    }
+  });
+}
 
 function content_switch(id_content)
 {
@@ -17,4 +30,4 @@ function content_switch(id_content)
   element.style.display = "block";
 }
 
-main_content_hide();
+hide_except('user_info')

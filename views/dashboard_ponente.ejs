@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
     <script src="/js/toggle.js"></script>
-    <title>Simple Sidebar Menu</title>
+    <title>Menú Ponente</title>
 </head>
   <body>
-
     <div class="sidebar" id="mySidebar">
-        <!-- Botón de toggle  -->
 
       <div class="menu-toggle-container">
         <button onclick="toggleSidebar()" class="menu_toggle_icon"></button>
@@ -22,48 +20,63 @@
 
         <h2 class="title-item">Menú</h2>
 
-        <!--  MODIFICAR PARA EJECUTAR JAVASCRIPT  -->
-        <!--  <a href="#" onclick="myFunction()">Click me</a>        -->
-        <a href="/logout" class="menu-item">
+        <a  onclick="content_switch('user_options')" class="menu-item">
           <img src="/images/user.png" class="menu-option-icon" alt="">
-          <%= username%>
+          <%= username %>
         </a>
 
-        <!--  MODIFICAR PARA EJECUTAR JAVASCRIPT  -->
-        <!--  <a href="#" onclick="myFunction()">Click me</a>        -->
-        <a href="/logout" class="menu-item">
+        <a  onclick="content_switch('conferencias')" class="menu-item">
           <img src="/images/presentation.png" class="menu-option-icon" alt="">
-            Mis conferencias
+            Conferencias
         </a>
 
-        <!--  MODIFICAR PARA EJECUTAR JAVASCRIPT  -->
-        <!--  <a href="#" onclick="myFunction()">Click me</a>        -->
-        <a href="/logout" class="menu-item">
+        <a  onclick="content_switch('salas')" class="menu-item">
           <img src="/images/classroom.png" class="menu-option-icon" alt="">
-            Itinerarios
+            Salas
         </a>
 
-        <!-- Botón de logout 󰗼 -->
+
         <a href="/logout" class="menu-item">
           <img src="/images/logout.png" class="menu-option-icon" alt="">
             Salir
         </a>
-
       </div>
     </div>
       
 
       <!-- Contenido Principal de la página. Editar para hacer los menús -->
 
-    <div class="main-content">
-      <h1>  DASHBOARD </h1>
-      <h2><%= username%></h2>
-      <h3>Nombre Completo: <%= full_name %></h3>
-      <h3>Email: <%= email %></h3>
-      <h3>Tipo de Usuario: <%= user_type  %></h3>
-      <p>This is the main content area of your webpage.</p>
-    </div>
+    <div class="main-content" >
 
+        <a onclick="content_switch('user_info')">
+          <img src="/images/home.png" alt="">
+        </a>
+              
+      <div id="user_info">
+        <h1>Información del Usuario</h1>
+        <h2>Username: <%= username %></h2>
+        <h2>Nombre Completo: <%= full_name %></h2>
+        <h2>Email: <%= email %></h2>
+        <h2>Tipo de Usuario: <%= user_type %></h2>
+      </div>
+
+      <div id="user_options">
+        <h1>User Options</h1>
+      </div>
+
+      <!-- Content for Conferencias -->
+      <div id="conferencias">
+        <h1>Conferencias</h1>
+        <!-- Add your content here -->
+      </div>
+
+      <!-- Content for Salas -->
+      <div id="salas">
+        <h1>Salas</h1>
+        <!-- Add your content here -->
+      </div>
+
+    </div>
+    <script src="/js/content_switch.js"></script>
   </body>
 </html>
-
