@@ -28,13 +28,12 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.set('js', __dirname + '/js');
 app.use(express.static(__dirname + '/public'));
-app.use(express.static(path.join(__dirname, '/public/dist')));
+app.use(express.static(path.join(__dirname, '/public/pagina_inicio')));
+app.use(express.static(path.join(__dirname, '/public/pagina_login')));
 app.set('routes', __dirname + '/routes');
 
 app.use('/',login_routes);
 app.use('/',dashboard_routes);
-
-
 
 
 // SERVIDOR

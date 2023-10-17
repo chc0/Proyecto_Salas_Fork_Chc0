@@ -5,10 +5,15 @@ const argon2 = require('argon2');
 
 const app = express()
 
-app.get('/',(req,res)=>{res.sendFile('/index.html')})
 
 
-app.get('/login', (req, res) => {res.render('login');});
+app.get('/',(req,res)=>{res.sendFile(path.join(__dirname, '../public/pagina_inicio/pagina_inicio.html'))})
+
+
+
+// app.get('/login', (req, res) => {res.render('login');});
+
+app.get('/login', (req, res) => {res.sendFile(path.join(__dirname,'../public/pagina_login/pagina_login.html'))})
 
 app.post('/login', (req, res) => 
 {
