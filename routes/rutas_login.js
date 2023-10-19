@@ -9,15 +9,18 @@ const app = express()
 
 app.get('/',(req,res)=>{res.sendFile(path.join(__dirname, '../public/pagina_inicio/pagina_inicio.html'))})
 
-
-
 // app.get('/login', (req, res) => {res.render('login');});
 
 app.get('/login', (req, res) => {res.sendFile(path.join(__dirname,'../public/pagina_login/pagina_login.html'))})
 
 app.post('/login', (req, res) => 
 {
-  const { username_or_email, password } = req.body;
+  // const { username_or_email, password } = req.body;
+  const username_or_email = req.body.username;
+  const password = req.body.password;
+
+  console.log(username_or_email);
+  console.log(password);
   get_pwd_hash(username_or_email, (err, pwd_hash_res)=>
   {
     if(err){console.log(err);res.render('login')}
@@ -27,6 +30,7 @@ app.post('/login', (req, res) =>
       {
         if (password_Matches) 
         {
+          console.log("LOGIN EXITOSO DEL USUARIO: ", username_or_email);
           req.session.isLoggedIn = true;
           get_everything(username_or_email,(err,everything)=>
           {
@@ -78,7 +82,7 @@ app.post('/register', (req, res) =>
         if (sql_res.affectedRows === 1)
         {
           console.log("REGISTRATION OF USER " + username); 
-          res.render('login')
+          res.sendFile(path.join(__dirname,'../public/pagina_login/pagina_login.html'))
         } 
         else {return res.status(401).send('REGISTRATION FAILED');}
       });
@@ -88,6 +92,22 @@ app.post('/register', (req, res) =>
     console.error('ERROR AL HASHEAR CONTRASEÑA:', error);
     });
   });
+
+
+async function hashPassword(password)
+{
+  try 
+  {
+    const hashedPassword = await argon2.hash(password);
+    return hashedPassword;
+  } catch (error) 
+  {
+    console.error('Error hashing password:', error);
+    throw error;
+  }
+
+}
+
 
 async function verifyPassword(hashedPassword, providedPassword) 
 {
