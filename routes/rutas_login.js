@@ -19,6 +19,9 @@ app.post('/login', (req, res) =>
   const username_or_email = req.body.username;
   const password = req.body.password;
 
+
+  console.log(req.body);
+
   console.log(username_or_email);
   console.log(password);
   get_pwd_hash(username_or_email, (err, pwd_hash_res)=>
