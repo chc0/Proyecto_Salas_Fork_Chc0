@@ -1,7 +1,6 @@
 import pandas as pd
 import re
 import json
-import mysql.connector
 
 excel_file = './Programa_Delfín_bdd.xlsx'
 df = pd.read_excel(excel_file)
@@ -73,6 +72,34 @@ def separar_opciones(cadena):
 
 def separar_instituciones(cadena):
     return re.split(r'[,]', cadena)
+
+
+def Creacion_Archivo_SQL(data_en_conjunto, n, output_file):
+
+    fields_to_print_in_order = [
+        "ID_Tra", "Area", "Rama", "ID_Pons", "Ponentes", "Instituciones",
+        "Linea", "Compartido", "NoPonentes", "Titulo", "Ingestigador",
+        "Fecha", "Dia", "Turno", "Bloque", "Salon", "Ubicacion", "Sede"
+    ]
+
+    sql_template = "INSERT INTO PONENCIAS ({}) VALUES ({});"
+
+    with open(output_file, "w") as file:
+        for i in range(n):
+            values = []
+
+            for field in fields_to_print_in_order:
+                if field in data_en_conjunto:
+                    value = data_en_conjunto[field]
+                    if isinstance(value, list):
+                        values.append(f"'{json.dumps(value[i], ensure_ascii=False)}'")
+                    else:
+                        values.append(f"'{value}'")
+
+            sql_statement = sql_template.format(", ".join(fields_to_print_in_order), ", ".join(values))
+
+            file.write(sql_statement)
+            file.write("\n")
 
  #  _____ _____ _______        
  # |_   _|  __ \__   __|       
@@ -224,12 +251,6 @@ for field in UBICACION_data:
 for field in SEDE_data:
     SEDE.append(field)
 
-
-
-
-
-
-
  #                                    _             _                          _     _            
  #     /\                            | |           | |          /\            | |   (_)           
  #    /  \   _ __ _ __ ___   __ _  __| | ___     __| | ___     /  \   _ __ ___| |__  ___   _____  
@@ -260,51 +281,6 @@ data_en_conjunto = {
         "Sede":SEDE
 }
 
-# with open("db_things.json", "w", encoding='utf-8') as json_file:
-#     json.dump(data_en_conjunto, json_file, ensure_ascii=False, indent=4)
-
-db = mysql.connector.connect(
-    host="172.17.0.2",
-    user="alvirelwapo",
-    password="6327",
-    database="SALAS_DB"
-)
-cursor = db.cursor()
-
-insert_data_sql = """
-INSERT INTO your_table_name 
-(
-ID_Tra, Area, Rama, Linea, Compartido, NoPonentes, Titulo, 
-ID_Pons, Ponentes, Instituciones, Investigador, Fecha, Dia, 
-Turno, Bloque, Salon, Ubicacion, Sede) 
-VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-"""
-
-def Creacion_Archivo_SQL(data_en_conjunto, n, output_file):
-    fields_to_print_in_order = [
-        "ID_Tra", "Area", "Rama", "ID_Pons", "Ponentes", "Instituciones",
-        "Linea", "Compartido", "NoPonentes", "Titulo", "Ingestigador",
-        "Fecha", "Dia", "Turno", "Bloque", "Salon", "Ubicacion", "Sede"
-    ]
-
-    sql_template = "INSERT INTO PONENCIAS ({}) VALUES ({});"
-
-    with open(output_file, "w") as file:
-        for i in range(n):
-            values = []
-
-            for field in fields_to_print_in_order:
-                if field in data_en_conjunto:
-                    value = data_en_conjunto[field]
-                    if isinstance(value, list):
-                        values.append(f"'{json.dumps(value[i], ensure_ascii=False)}'")
-                    else:
-                        values.append(f"'{value}'")
-
-            sql_statement = sql_template.format(", ".join(fields_to_print_in_order), ", ".join(values))
-
-            file.write(sql_statement)
-            file.write("\n")
 
 output_file = "output.sql"
 Creacion_Archivo_SQL(data_en_conjunto, 1000, output_file)
