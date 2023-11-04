@@ -9,7 +9,7 @@ USE SALAS_DB;
 -- ♪ღ♪*•.¸¸.•*¨¨*•.♪ ℂℝ𝔼𝔸ℂ𝕀Óℕ 𝔻𝔼 𝕋𝔸𝔹𝕃𝔸𝕊 ♪ღ♪*•.¸¸.•*¨¨*•.♪ღ♪ --
 --//////////////////////////////////////////////////////////--
 
-CREATE TABLE USUARIO 
+CREATE TABLE IF NOT EXISTS USUARIO 
 (
   usuario_id INT AUTO_INCREMENT PRIMARY KEY,
   tipo_usuario ENUM('alumno', 'ponente', 'administrador') NOT NULL,
@@ -19,39 +19,32 @@ CREATE TABLE USUARIO
   nombre_usuario VARCHAR(30) NOT NULL UNIQUE
 );
 
-CREATE TABLE SALA 
+CREATE TABLE IF NOT EXISTS SALA 
 (
   id_Sala INT AUTO_INCREMENT PRIMARY KEY,
   Ubicacion_Fisica VARCHAR(3),
   Cupo INT
 );
 
-CREATE TABLE PONENCIA 
-(
-  id_Ponencia INT AUTO_INCREMENT PRIMARY KEY,
-  id_Ponente INT, 
-  id_Sala INT,
-  Horario DATETIME,
-  FOREIGN KEY (id_Sala) REFERENCES SALA(id_Sala),
-  FOREIGN KEY (id_Ponente) REFERENCES USUARIO(usuario_id)
-);
-
-CREATE TABLE USUARIO_PONENCIA 
-(
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  id_Usuario INT,
-  id_Ponencia INT,
-  FOREIGN KEY (id_Usuario) REFERENCES USUARIO(usuario_id),
-  FOREIGN KEY (id_Ponencia) REFERENCES PONENCIA(id_Ponencia)
-);
-
-CREATE TABLE REGISTRO 
-(
-  id_ponencia INT,
-  id_alumno INT,
-  asistencia BOOLEAN,
-  FOREIGN KEY (id_ponencia) REFERENCES PONENCIA(id_Ponencia),
-  FOREIGN KEY (id_alumno) REFERENCES USUARIO(usuario_id)
+CREATE TABLE IF NOT EXISTS PONENCIAS(
+    ID_Tra VARCHAR(5),
+    Area TEXT,
+    Rama JSON,
+    Linea TEXT,
+    Compartido VARCHAR(2),
+    NoPonentes INT,
+    Titulo TEXT,
+    ID_Pons JSON,
+    Ponentes JSON,
+    Instituciones JSON,
+    Investigador VARCHAR(255),
+    Fecha DATE,
+    Dia VARCHAR(20),
+    Turno VARCHAR(20),
+    Bloque TEXT,
+    Salon TEXT,
+    Ubicacion TEXT,
+    Sede TEXT
 );
 
 --//////////////////////////////////////////////////////////--
