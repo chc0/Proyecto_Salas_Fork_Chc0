@@ -283,4 +283,4 @@ data_en_conjunto = {
 
 
 output_file = "output.sql"
-Creacion_Archivo_SQL(data_en_conjunto, 1000, output_file)
+Creacion_Archivo_SQL(data_en_conjunto, 100, output_file)
