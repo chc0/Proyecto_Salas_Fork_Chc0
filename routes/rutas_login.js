@@ -13,55 +13,39 @@ app.get('/',(req,res)=>{res.sendFile(path.join(__dirname, '../public/paginas/mai
 
 app.get('/login', (req, res) => {res.sendFile(path.join(__dirname,'../public/paginas/login.html'))})
 
-app.post('/login', (req, res) => 
-{
-  // const { username_or_email, password } = req.body;
+app.post('/login', (req, res) => {
   const username_or_email = req.body.username;
   const password = req.body.password;
-
-
-  console.log(req.body);
-
-  console.log(username_or_email);
-  console.log(password);
-  get_pwd_hash(username_or_email, (err, pwd_hash_res)=>
-  {
-    if(err){console.log(err);res.render('login')}
-    else
-    {
-      verifyPassword(pwd_hash_res,password).then((password_Matches) => 
-      {
-        if (password_Matches) 
-        {
+  get_pwd_hash(username_or_email, (err, pwd_hash_res) => {
+    if (err) {
+      console.log(err);
+      return res.status(505).send("USER NOT FOUND");
+    } else {
+      verifyPassword(pwd_hash_res, password).then((password_Matches) =>       {
+        if (password_Matches) {
           console.log("LOGIN EXITOSO DEL USUARIO: ", username_or_email);
           req.session.isLoggedIn = true;
-          get_everything(username_or_email,(err,everything)=>
-          {
+          get_everything(username_or_email, (err, everything) => {
             req.session.username = everything[0].nombre_usuario;
             req.session.full_name = everything[0].nombre_completo;
             req.session.user_type = everything[0].tipo_usuario;
             req.session.email = everything[0].email;
-            if(req.session.user_type === 'alumno')
-            {
+            if (req.session.user_type === 'alumno') {
               res.redirect('/dashboard');
-            }
-            else if(req.session.user_type === 'ponente')
-            {
+            } else if (req.session.user_type === 'ponente') {
               res.redirect('/dashboard/ponente');
-            }
-            else if(req.session.user_type === 'administrador')
-            {
+            } else if (req.session.user_type === 'administrador') {
               res.redirect('/admin');
             }
           });
-        } else 
-        {
+        } else {
           console.log('INTENTO DE SESIÓN FALLIDO');
+          res.status(505).send("Login Failed");
         }
       })
-      .catch((error) => 
-      {
-          console.error('Hasheo de contraseña fallido:', error);
+      .catch((error) => {
+        console.error('Hasheo de contraseña fallido:', error);
+        res.status(505).send("PASSWORD HASHING FALLIDO");
       });
     }
   });

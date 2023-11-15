@@ -1,9 +1,13 @@
 import pandas as pd
+from datetime import datetime
 import re
 import json
 
-excel_file = './Programa_Delfín_bdd.xlsx'
-df = pd.read_excel(excel_file)
+ponencias_documento = './Programa_Delfín_bdd.xlsx'
+df = pd.read_excel(ponencias_documento)
+
+moderadores_documento = './Moderadores.xlsx'
+df2 = pd.read_excel(moderadores_documento)
 
  #   _____      _                                 
  #  / ____|    | |                                
@@ -12,6 +16,15 @@ df = pd.read_excel(excel_file)
  # | |___| (_) | | |_| | | | | | | | | | (_| \__ \
  #  \_____\___/|_|\__,_|_| |_| |_|_| |_|\__,_|___/
 
+#  /$$$$$$$                                                   /$$                    
+# | $$__  $$                                                 |__/                    
+# | $$  \ $$ /$$$$$$  /$$$$$$$   /$$$$$$  /$$$$$$$   /$$$$$$$ /$$  /$$$$$$   /$$$$$$$
+# | $$$$$$$//$$__  $$| $$__  $$ /$$__  $$| $$__  $$ /$$_____/| $$ |____  $$ /$$_____/
+# | $$____/| $$  \ $$| $$  \ $$| $$$$$$$$| $$  \ $$| $$      | $$  /$$$$$$$|  $$$$$$ 
+# | $$     | $$  | $$| $$  | $$| $$_____/| $$  | $$| $$      | $$ /$$__  $$ \____  $$
+# | $$     |  $$$$$$/| $$  | $$|  $$$$$$$| $$  | $$|  $$$$$$$| $$|  $$$$$$$ /$$$$$$$/
+# |__/      \______/ |__/  |__/ \_______/|__/  |__/ \_______/|__/ \_______/|_______/ 
+#                                                                                    
 ID_TRA_data = df["ID_Tra"]
 AREA_data= df["Area"]
 LINEA_data = df["Linea"]
@@ -30,7 +43,27 @@ SALON_data = df["Salon"]
 UBICACION_data = df["Ubicacion"]
 SEDE_data = df["Sede"]
 
+#  /$$      /$$                 /$$                                    /$$                                        
+# | $$$    /$$$                | $$                                   | $$                                        
+# | $$$$  /$$$$  /$$$$$$   /$$$$$$$  /$$$$$$   /$$$$$$  /$$$$$$   /$$$$$$$  /$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$$
+# | $$ $$/$$ $$ /$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$|____  $$ /$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$ /$$_____/
+# | $$  $$$| $$| $$  \ $$| $$  | $$| $$$$$$$$| $$  \__/ /$$$$$$$| $$  | $$| $$  \ $$| $$  \__/| $$$$$$$$|  $$$$$$ 
+# | $$\  $ | $$| $$  | $$| $$  | $$| $$_____/| $$      /$$__  $$| $$  | $$| $$  | $$| $$      | $$_____/ \____  $$
+# | $$ \/  | $$|  $$$$$$/|  $$$$$$$|  $$$$$$$| $$     |  $$$$$$$|  $$$$$$$|  $$$$$$/| $$      |  $$$$$$$ /$$$$$$$/
+# |__/     |__/ \______/  \_______/ \_______/|__/      \_______/ \_______/ \______/ |__/       \_______/|_______/ 
+#                                                                                                                 
 
+# PAIS_data = df["País"]
+# INSTITUCION_data = df["Institución"]
+# MODALIDAD_data = df["Modalidad"]
+# AREA_data = df["Área"]
+# ID_MOD_data = df["ID_Mod"]
+# MODERADOR_data = df["Moderador"]
+# SEXO_data = df["Sexo"]
+# CORREO_data = df["Correo"]
+# CELULAR_data = df["Celular"]
+# SALA_data = df["Sala"]
+#
  #                               _           
  #     /\                       | |          
  #    /  \   _ __ _ __ ___  __ _| | ___  ___ 
@@ -39,6 +72,17 @@ SEDE_data = df["Sede"]
  # /_/    \_\_|  |_|  \___|\__, |_|\___/|___/
  #                          __/ |            
  #                         |___/             
+
+#  /$$$$$$$                                                   /$$                    
+# | $$__  $$                                                 |__/                    
+# | $$  \ $$ /$$$$$$  /$$$$$$$   /$$$$$$  /$$$$$$$   /$$$$$$$ /$$  /$$$$$$   /$$$$$$$
+# | $$$$$$$//$$__  $$| $$__  $$ /$$__  $$| $$__  $$ /$$_____/| $$ |____  $$ /$$_____/
+# | $$____/| $$  \ $$| $$  \ $$| $$$$$$$$| $$  \ $$| $$      | $$  /$$$$$$$|  $$$$$$ 
+# | $$     | $$  | $$| $$  | $$| $$_____/| $$  | $$| $$      | $$ /$$__  $$ \____  $$
+# | $$     |  $$$$$$/| $$  | $$|  $$$$$$$| $$  | $$|  $$$$$$$| $$|  $$$$$$$ /$$$$$$$/
+# |__/      \______/ |__/  |__/ \_______/|__/  |__/ \_______/|__/ \_______/|_______/ 
+#                                                                                    
+
 ID_TRA = []
 AREA = []
 RAMA = []
@@ -57,6 +101,31 @@ BLOQUE = []
 SALON = [] 
 UBICACION = [] 
 SEDE = [] 
+
+#  /$$      /$$                 /$$                                    /$$                                        
+# | $$$    /$$$                | $$                                   | $$                                        
+# | $$$$  /$$$$  /$$$$$$   /$$$$$$$  /$$$$$$   /$$$$$$  /$$$$$$   /$$$$$$$  /$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$$
+# | $$ $$/$$ $$ /$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$|____  $$ /$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$ /$$_____/
+# | $$  $$$| $$| $$  \ $$| $$  | $$| $$$$$$$$| $$  \__/ /$$$$$$$| $$  | $$| $$  \ $$| $$  \__/| $$$$$$$$|  $$$$$$ 
+# | $$\  $ | $$| $$  | $$| $$  | $$| $$_____/| $$      /$$__  $$| $$  | $$| $$  | $$| $$      | $$_____/ \____  $$
+# | $$ \/  | $$|  $$$$$$/|  $$$$$$$|  $$$$$$$| $$     |  $$$$$$$|  $$$$$$$|  $$$$$$/| $$      |  $$$$$$$ /$$$$$$$/
+# |__/     |__/ \______/  \_______/ \_______/|__/      \_______/ \_______/ \______/ |__/       \_______/|_______/ 
+#                                                                                                                 
+
+PAIS = []
+INSTITUCION = []
+MODALIDAD = []
+AREA = []
+ID_MOD = []
+MODERADOR = []
+SEXO = []
+CORREO = []
+CELULAR = []
+SALA = []
+#Correo Alternativo
+#Sala 2
+
+
  #  ______                _                       
  # |  ____|              (_)                      
  # | |__ _   _ _ __   ___ _  ___  _ __   ___  ___ 
@@ -74,13 +143,28 @@ def separar_instituciones(cadena):
     return re.split(r'[,]', cadena)
 
 
-def Creacion_Archivo_SQL(data_en_conjunto, n, output_file):
+import json
 
+def Creacion_Archivo_SQL(data_en_conjunto, n, output_file):
     fields_to_print_in_order = [
-        "ID_Tra", "Area", "Rama", "ID_Pons", "Ponentes", "Instituciones",
-        "Linea", "Compartido", "NoPonentes", "Titulo", "Ingestigador",
-        "Fecha", "Dia", "Turno", "Bloque", "Salon", "Ubicacion", "Sede"
-    ]
+        "ID_Tra",
+        "Area",
+        "Rama",
+        "Linea",
+        "Compartido",
+        "NoPonentes",
+        "Titulo",        
+        "ID_Pons",
+        "Ponentes",
+        "Instituciones",
+        "Investigador",
+        "Fecha",
+        "Dia",
+        "Turno",
+        "Bloque",
+        "Salon",
+        "Ubicacion",
+        "Sede"]
 
     sql_template = "INSERT INTO PONENCIAS ({}) VALUES ({});"
 
@@ -92,14 +176,14 @@ def Creacion_Archivo_SQL(data_en_conjunto, n, output_file):
                 if field in data_en_conjunto:
                     value = data_en_conjunto[field]
                     if isinstance(value, list):
-                        values.append(f"'{json.dumps(value[i], ensure_ascii=False)}'")
+                        values.append(json.dumps(value[i], ensure_ascii=False))
                     else:
-                        values.append(f"'{value}'")
+                        values.append(str(value))  
 
             sql_statement = sql_template.format(", ".join(fields_to_print_in_order), ", ".join(values))
 
-            file.write(sql_statement)
-            file.write("\n")
+            file.write(sql_statement + "\n")
+
 
  #  _____ _____ _______        
  # |_   _|  __ \__   __|       
@@ -237,7 +321,29 @@ for field in INVESTIGADOR_data:
  #
 
 for field in FECHA_data:
-    FECHA.append(field)
+    parts = [part for part in field.split() if part.lower() != 'de']
+    day, month, year = parts[0:3]
+    month_mapping = {
+        'Enero': '01',
+        'Febrero': '02',
+        'Marzo': '03',
+        'Abril': '04',
+        'Mayo': '05',
+        'Junio': '06',
+        'Julio': '07',
+        'Agosto': '08',
+        'Septiembre': '09',
+        'Octubre': '10',
+        'Noviembre': '11',
+        'Diciembre': '12'
+    }
+
+    formatted_date = f"{year}-{month_mapping[month]}-{day}"
+    FECHA.append(formatted_date)
+
+# for field in FECHA_data:
+#     FECHA.append(field)
+
 for field in DIA_data:
     DIA.append(field)
 for field in TURNO_data:
@@ -271,7 +377,7 @@ data_en_conjunto = {
         "ID_Pons":ID_PONENTES ,
         "Ponentes":NOMBRE_PONENTES ,
         "Instituciones":INSTITUCIONES ,
-        "Ingestigador":INVESTIGADOR ,
+        "Investigador":INVESTIGADOR ,
         "Fecha":FECHA ,
         "Dia":DIA ,
         "Turno":TURNO ,
@@ -283,4 +389,6 @@ data_en_conjunto = {
 
 
 output_file = "output.sql"
-Creacion_Archivo_SQL(data_en_conjunto, 100, output_file)
+Creacion_Archivo_SQL(data_en_conjunto, 1743, output_file)
+
+

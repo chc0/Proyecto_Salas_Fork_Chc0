@@ -7,6 +7,7 @@ const db = require('./db/database_connection');
 const argon2 = require('argon2');
 const login_routes = require ('./routes/rutas_login');
 const dashboard_routes = require ('./routes/rutas_dashboards');
+const sql_views_router = require ('./routes/views_sql');
 
 //EXPRESS Y MIDDLEWARE
 const app = express();
@@ -33,6 +34,8 @@ app.set('routes', __dirname + '/routes');
 
 app.use('/',login_routes);
 app.use('/',dashboard_routes);
+app.use('/',sql_views_router);
+
 
 
 // SERVIDOR
