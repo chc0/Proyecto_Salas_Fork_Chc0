@@ -6,9 +6,6 @@ import json
 ponencias_documento = './Programa_Delfín_bdd.xlsx'
 df = pd.read_excel(ponencias_documento)
 
-moderadores_documento = './Moderadores.xlsx'
-df2 = pd.read_excel(moderadores_documento)
-
  #   _____      _                                 
  #  / ____|    | |                                
  # | |     ___ | |_   _ _ __ ___  _ __   __ _ ___ 

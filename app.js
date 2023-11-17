@@ -8,6 +8,7 @@ const argon2 = require('argon2');
 const login_routes = require ('./routes/rutas_login');
 const dashboard_routes = require ('./routes/rutas_dashboards');
 const sql_views_router = require ('./routes/views_sql');
+const cors = require('cors');
 
 //EXPRESS Y MIDDLEWARE
 const app = express();
@@ -20,6 +21,8 @@ app.use(session({
     maxAge: 86400000, 
   },
 }));
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -47,6 +47,46 @@ CREATE TABLE IF NOT EXISTS PONENCIAS(
     Sede TEXT
 );
 
+CREATE TABLE IF NOT EXISTS MODERADORES (
+    Pais TEXT,
+    Institucion TEXT,
+    Modalidad TEXT,
+    Area TEXT,
+    Rama JSON,
+    ID_Mod VARCHAR(5),
+    Moderador TEXT,
+    Sexo TEXT,
+    Correo TEXT,
+    Celular TEXT,
+    Sala TEXT,
+    Correo_Alternativo TEXT,
+    Sala2 TEXT
+);
+
+
+--//////////////////////////////////////////////////////////--
+--∙∙·▫▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ  CREACION DE VISTAS  ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫▫·∙∙--
+--//////////////////////////////////////////////////////////--
+
+CREATE VIEW Ring_Graph AS
+SELECT AREA, COUNT(AREA) AS NoDeAreas 
+FROM PONENCIAS GROUP BY AREA;
+
+CREATE VIEW RG_Fechas AS
+SELECT Dia, COUNT(Dia) AS NoDias
+FROM PONENCIAS 
+GROUP BY Dia;
+
+CREATE VIEW TABLA_USUARIOS AS 
+SELECT ID_Tra ,NoPonentes,Ponentes,ID_Pons FROM PONENCIAS;
+
+CREATE VIEW RG_x_Sedes AS 
+SELECT SEDE, COUNT(SEDE) AS NoDeSedes 
+FROM PONENCIAS GROUP BY SEDE; 
+
+CREATE VIEW USUARIOS_POR_SALAS AS 
+SELECT ID_Tra, NoPonentes, Ponentes, ID_Pons, Salon FROM PONENCIAS;
+
 --//////////////////////////////////////////////////////////--
 --∙∙·▫▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ ADICIÓN DE OBJETOS TEMPORALES ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫ₒₒ▫ᵒᴼᵒ▫▫·∙∙--
 --//////////////////////////////////////////////////////////--

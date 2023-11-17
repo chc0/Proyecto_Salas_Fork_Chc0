@@ -1,8 +1,9 @@
 import pandas as pd
 import re
 import json
+import math
 
-excel_file = './db/moderadores.xlsx'
+excel_file = './Moderadores.xlsx'
 df = pd.read_excel(excel_file)
 
  #   _____      _                                 
@@ -70,7 +71,6 @@ def limpiar_numero(celular):
     return solo_digitos[-10:]
 
 def Creacion_Archivo_SQL(data_en_conjunto, n, output_file):
-
     fields_to_print_in_order = [
         "Pais", "Institucion", "Modalidad", "Area", "Rama", "ID_Mod",
         "Moderador", "Sexo", "Correo", "Celular", "Sala", "Correo_Alternativo", "Sala2"
@@ -78,7 +78,7 @@ def Creacion_Archivo_SQL(data_en_conjunto, n, output_file):
 
     sql_template = "INSERT INTO MODERADORES ({}) VALUES ({});"
 
-    with open(output_file, "w", encoding="utf-8") as file:
+    with open(output_file, "w") as file:
         for i in range(n):
             values = []
 
@@ -86,21 +86,18 @@ def Creacion_Archivo_SQL(data_en_conjunto, n, output_file):
                 if field in data_en_conjunto:
                     value = data_en_conjunto[field]
                     if isinstance(value, list):
-                        values.append(f"'{json.dumps(value[i], ensure_ascii=False)}'")
+                        values.append(json.dumps(value[i], ensure_ascii=False))
                     else:
-                        values.append(f"'{value}'")
+                        values.append(str(value))  
 
             sql_statement = sql_template.format(", ".join(fields_to_print_in_order), ", ".join(values))
 
-            file.write(sql_statement)
-            file.write("\n")
+            file.write(sql_statement + "\n")
 
 
  #  pais
-
 for field in PAIS_data:
     PAIS.append(field)
-
 #  institucion
 
 for field in INSTITUCION_data:
@@ -121,10 +118,14 @@ for column in AREA_data:
 
 
 # id_mod
+
 for field in ID_MOD_data:
-    ID_MOD.append(field)
-
-
+    if math.isnan(field):
+        formatted_field = "NULL"
+    else:
+        formatted_field = str(int(field)).zfill(5)
+    ID_MOD.append(formatted_field)
+    
  #  moderador
 
 for field in MODERADOR_data:
@@ -184,4 +185,4 @@ data_en_conjunto = {
 
 
 output_file = "output_mods.sql"
-Creacion_Archivo_SQL(data_en_conjunto, 100, output_file)
+Creacion_Archivo_SQL(data_en_conjunto, 215, output_file)
