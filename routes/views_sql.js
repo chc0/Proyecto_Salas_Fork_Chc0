@@ -73,7 +73,7 @@ const getEquiposByTrabId = (Id_Trab, callback) => {
 
 const getListaSedes = (callback) => {
   db.query(
-    'SELECT Salon FROM PONENCIAS GROUP BY Salon ;',
+    'SELECT Salon FROM PONENCIAS GROUP BY Salon;',
     (err, sqlRes) => {
       if (err) {
         console.error(err);
@@ -106,7 +106,20 @@ const getEquiposBySalon = (Id_Trab, callback) => {
 };
 
 
-
+const Actualizar_lista_asistencias = (Id_Trab, Array_Asistencias, callback) => {
+  db.query(
+    'UPDATE PONENCIAS SET Asistencia = ? WHERE ID_Tra = ?',
+    [JSON.stringify(Array_Asistencias), Id_Trab],
+    (updateErr, updateRes) => {
+      if (updateErr) {
+        console.error(updateErr);
+        callback("update_error");
+      } else {
+        callback(null, updateRes);
+      }
+    }
+  );
+};
 
 
 
@@ -175,18 +188,30 @@ app.get('/sedes', (req,res) =>
 
 app.post('/informacion_por_salones', (req, res) => {
   const { Salon } = req.body;
-  console.log(req.body);
+  console.log(Salon);
   getEquiposBySalon(Salon, (error, result) => 
   {
     if (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
     } else {
-      console.log(result);
       res.json(result);
 
     }
   });
 });
+
+app.post('/asistencia', (req, res) => {
+  console.log("recieved asistencia request");
+  const { Id_Trab, Asistencia } = req.body;
+  Actualizar_lista_asistencias(Id_Trab, Asistencia, (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: err });
+    }
+    res.json({ message: 'Successfully updated asistencia array.' });
+  });
+});
+
+
 
 module.exports = app;
