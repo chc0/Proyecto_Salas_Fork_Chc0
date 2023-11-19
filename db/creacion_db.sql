@@ -44,7 +44,8 @@ CREATE TABLE IF NOT EXISTS PONENCIAS(
     Bloque TEXT,
     Salon TEXT,
     Ubicacion TEXT,
-    Sede TEXT
+    Sede TEXT,
+    Asistencia JSON DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS MODERADORES (
@@ -60,7 +61,8 @@ CREATE TABLE IF NOT EXISTS MODERADORES (
     Celular TEXT,
     Sala TEXT,
     Correo_Alternativo TEXT,
-    Sala2 TEXT
+    Sala2 TEXT,
+    Asistencia VARCHAR(2) DEFAULT NULL
 );
 
 
