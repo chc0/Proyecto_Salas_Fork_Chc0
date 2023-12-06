@@ -22,6 +22,7 @@ df = pd.read_excel(ponencias_documento)
 # | $$     |  $$$$$$/| $$  | $$|  $$$$$$$| $$  | $$|  $$$$$$$| $$|  $$$$$$$ /$$$$$$$/
 # |__/      \______/ |__/  |__/ \_______/|__/  |__/ \_______/|__/ \_______/|_______/ 
 #                                                                                    
+ID_TRA_data = df["ID_Tra"]
 AREA_data= df["Area"]
 CAMPO_data = df["Campo"]
 DISCIPLINA_data = df["Disciplina"]
@@ -45,6 +46,7 @@ INSTITUCIONES_data = df["Institucion(es)"]
 #  Salas
 #                                                                                    
 
+ID_TRA = []
 AREA = []
 CAMPO = []
 DISCIPLINA = []
@@ -79,7 +81,7 @@ import json
 
 def Creacion_Archivo_SQL(data_en_conjunto, n, output_file):
     fields_to_print_in_order = [
-        "Area", "Campo", "Disciplina", "Titulo", "Compartido", "NoPonentes", "ID_Pons", "Ponentes", "Instituciones"
+        "ID_Pon", "Area", "Campo", "Disciplina", "Titulo", "Compartido", "NoPonentes", "ID_Pons", "Ponentes", "Instituciones"
 
     ]
 
@@ -109,7 +111,9 @@ def Creacion_Archivo_SQL(data_en_conjunto, n, output_file):
 
 
 
-
+ # ID_PON                 
+for field in ID_TRA_data:
+    ID_TRA.append(field)
 
 
  #     /\                   
@@ -218,6 +222,7 @@ for column in INSTITUCIONES_data:
                                                                                                 
 
 data_en_conjunto = {
+        "ID_Pon":ID_TRA ,
         "Area":AREA ,
         "Campo":CAMPO ,
         "Disciplina":DISCIPLINA,

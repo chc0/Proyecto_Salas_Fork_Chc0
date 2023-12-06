@@ -121,33 +121,122 @@ const Actualizar_lista_asistencias = (Id_Trab, Array_Asistencias, callback) => {
   );
 };
 
-// Función para obtener los parámetros desde la base de datos
-const obtenerParametros = async () => {
-  try {
-    const resultado = await pool.query('SELECT * FROM parametros');
-    const parametros = {};
-    
-    // Convertir los resultados en un objeto de parámetros
-    resultado.forEach(fila => {
-      parametros[fila.nombre_parametro] = fila.valor_parametro;
-    });
-
-    return parametros;
-  } catch (error) {
-    console.error('Error al obtener parámetros:', error);
-    throw error;
-  }
+const GET_TOTAL_PON= (callback) => {
+  db.query(
+    'SELECT COUNT(*) FROM PONENCIAS2',
+    (err, sqlRes) => {
+      if (err) {
+        console.error(err);
+        callback("sql_error");
+      } else if (sqlRes.length > 0) {
+        callback(null, sqlRes);
+      } else {
+        callback("No data available in Ponencias2 ");
+      }
+    }
+  );
 };
 
-// Ruta para obtener los parámetros
-app.get('/parametros', async (req, res) => {
-  try {
-    const parametros = await obtenerParametros();
-    res.json(parametros);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Internal Server Error');
-  }
+const GET_ID_PON= (callback) => {
+  db.query(
+    'SELECT ID_Pon FROM PONENCIAS2',
+    (err, sqlRes) => {
+      if (err) {
+        console.error(err);
+        callback("sql_error");
+      } else if (sqlRes.length > 0) {
+        callback(null, sqlRes);
+      } else {
+        callback("No data available in ID_Pon view");
+      }
+    }
+  );
+};
+
+const getPonenciasById = (Id_Pon, callback) => {
+  db.query(
+    'SELECT * FROM PONENCIAS2 WHERE ID_Pon = ?',
+    [Id_Pon],
+    (err, sqlRes) => {
+      if (err) {
+        console.error('Error en la consulta de getPonenciasById:', err);
+        callback(err, null);
+      } else if (sqlRes.length > 0) {
+        callback(null, sqlRes);
+      } else {
+        console.log('No se encontraron datos para el ID_Pon:', Id_Pon);
+        callback(`No data available for the specified Id_Pon: ${Id_Pon}`, null);
+      }
+    }
+  );
+};
+
+
+const getParametros = (callback) => {
+  db.query(
+    'SELECT * FROM PARAMETROS',
+    (err, sqlRes) => {
+      if (err) {
+        console.error(err);
+        callback("sql_error");
+      } else if (sqlRes.length > 0) {
+        callback(null, sqlRes);
+      } else {
+        callback("No data available in PARAMETROS");
+      }
+    }
+  );
+};
+
+
+app.get('/parametros', (req, res) => {
+  getParametros((error, result) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+
+
+app.post('/informacion_de_ponencias', (req, res) => {
+  const { ID_Pon } = req.body;
+  console.log('ID_Pon recibido:', ID_Pon);
+
+  getPonenciasById(ID_Pon, (error, result) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+
+app.get('/id_pon', (req, res) => {
+  GET_ID_PON((error, result) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+app.get('/total_ponencias', (req, res) => {
+  GET_TOTAL_PON((error, result) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    } else {
+      res.json(result);
+    }
+  });
 });
 
 
