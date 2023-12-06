@@ -139,7 +139,7 @@ CREATE TABLE parametros (
 INSERT INTO parametros (nombre_parametro, valor_parametro) VALUES
   ('numero_edificios', 3),
   ('salas_por_edificio', 10),
-  ('capacidad_sala', 25),
+  ('capacidad_sala', 26),
   ('minutos_ponencia', 10),
   ('minutos_bloque', 60),
   ('numero_minimo_bloque_sala', 3),
